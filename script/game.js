@@ -17,8 +17,10 @@ class Game extends Node {
             this._createCards();
             this._createScore();
             this.score += 10000;
+            this.canClick = false;
             gsap.to(this.label,{text: this.score,duration: 6, snap:"text"});
             setTimeout(()=>{
+                this.canClick =true;
                 this.resetGame();
             },6000);
         },100);
@@ -107,19 +109,21 @@ class Game extends Node {
     }
     onClickCard(card){
         this.playSound(this.soundId[1]);
-        if(this.firstCard === null) {
-            this.firstCard = card;
-            this.firstCard.flipCard();
-        }else if(this.secondCard === null) {
-            this.secondCard = card;
-            if(this.firstCard.index === this.secondCard.index) this.secondCard=null;
-            else{
-                this.secondCard.flipCard();
-                setTimeout(() => {
-                    this.compareCard(this.firstCard,this.secondCard);
-                }, 1000);
-                console.log(this.firstCard);
-                console.log(this.secondCard);
+        if(this.canClick){
+            if(this.firstCard === null) {
+                this.firstCard = card;
+                this.firstCard.flipCard();
+            }else if(this.secondCard === null) {
+                this.secondCard = card;
+                if(this.firstCard.index === this.secondCard.index) this.secondCard=null;
+                else{
+                    this.secondCard.flipCard();
+                    setTimeout(() => {
+                        this.compareCard(this.firstCard,this.secondCard);
+                    }, 1000);
+                    console.log(this.firstCard);
+                    console.log(this.secondCard);
+                }
             }
         }
     }
