@@ -132,7 +132,7 @@ class Game extends Node {
             this.playSound(this.soundId[2]);
             this.count++;
             this.score += 1000;
-            gsap.to(this.label,{text: this.score,duration: 1.5, snap:"text"});
+            gsap.fromTo(this.label,{fontColor: "lightgreen"},{text: this.score,delay:0.1,fontColor: "white",duration: 1.5, snap:"text"});
             firstCard.scaleHideImage();
             secondCard.scaleHideImage();
             setTimeout(()=>{
@@ -142,7 +142,7 @@ class Game extends Node {
         }else {
             this.playSound(this.soundId[2]);
             this.score -= 500;
-            gsap.to(this.label, {text: this.score,duration: 1.5, snap:"text"});
+            gsap.fromTo(this.label,{fontColor: "red"},{text: this.score,delay:0.1,fontColor: "white",duration: 1.5, snap:"text"});
             console.log(this.score);
             firstCard.flopCard();
             secondCard.flopCard();
