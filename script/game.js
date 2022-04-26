@@ -133,7 +133,7 @@ class Game extends Node {
     compareCard(firstCard,secondCard){
         if(firstCard.value === secondCard.value){
             this.playSound(this.soundId[2]);
-            this.count+=10;
+            this.count++;
             this.score += 1000;
             gsap.fromTo(this.label,{fontColor: "lightgreen"},{text: this.score,delay:0.1,fontColor: "white",duration: 1.5, snap:"text"});
             firstCard.scaleHideImage();
