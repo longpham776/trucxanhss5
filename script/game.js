@@ -77,15 +77,18 @@ class Game extends Node {
             this.card.setValue(index%10);
             this.cards.push(this.card);
             this.addChild(this.cards[index]);
-            tl.fromTo(this.cards[index].elm,{x: 240,y: 190, opacity: 0.2,zIndex: 0},{x: 240,y: 190,opacity:1, duration: 0.1})
+            this.cards[index].cover.elm.style.opacity = 0.8;
+            tl.fromTo(this.cards[index].elm,{x: 240,y: 190, opacity: 0,zIndex: 0},{x: 240,y: 190,opacity:1, duration: 0.1});
+            setTimeout(()=>{
+                this.cards[index].cover.elm.style.opacity = 1;
+            },2000);
             tl.play();
        }
         setTimeout(()=>{
             for (let index = 0; index < 20;index++){
                 let col = Math.floor(index/5);
                 let row = index % 5;
-                tl.fromTo(this.cards[index].elm,{x: 240,y: 190,opacity: 1},{ duration: 0.2,zIndex: 1, ease: "back.out(3)", x: row*120,y: col*120 });
-                tl.play();
+                TweenMax.fromTo(this.cards[index].elm,{x: 240,y: 190,opacity: 1},{ duration: 0.8,delay:index*0.2,zIndex: 1, ease: "back.out(3)", x: row*120,y: col*120 });
             }
         },2000);
     }
